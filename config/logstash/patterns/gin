@@ -1,0 +1,2 @@
+GIN_TIMESTAMP %{YEAR}/%{MONTHNUM}/%{MONTHDAY} - %{HOUR}:%{MINUTE}:%{SECOND}
+GINLOG \[%{DATA:[gin][type]}\] %{GIN_TIMESTAMP:[gin][time]} \| %{NUMBER:[gin][response_status]} \| \s*%{DATA:[gin][response_time]}\s* \| \s*%{IPORHOST:[gin][remote_ip]}\s* \| \s*%{DATA:[gin][method]}\s* \"%{DATA:[gin][url]}\"
