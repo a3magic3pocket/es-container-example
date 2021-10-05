@@ -1,0 +1,16 @@
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  paths:
+    - /root/api/gin.log
+  tags: ["gin"]
+
+# output.elasticsearch:
+#   hosts: ["localhost:9200"]
+
+output.logstash:
+  hosts: ["${LOGSTASH_IP:=localhost}:5044"]
+
+logging.level: debug
+logging.to_stderr: true
+logging.to_syslog: true
