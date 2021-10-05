@@ -1,0 +1,22 @@
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  paths:
+    - /var/log/nginx/access.log
+  tags: ["nginx-access"]
+
+- type: filestream
+  enabled: true
+  paths:
+    - /var/log/nginx/error.log
+  tags: ["nginx-error"]
+
+# output.elasticsearch:
+#   hosts: ["localhost:9200"]
+
+output.logstash:
+  hosts: ["${LOGSTASH_IP:=localhost}:5044"]
+
+logging.level: debug
+logging.to_stderr: true
+logging.to_syslog: true
