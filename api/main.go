@@ -12,7 +12,8 @@ import (
 )
 
 func handleNow(c *gin.Context) {
-	now := time.Now()
+	loc, _ := time.LoadLocation("Asia/Seoul")
+	now := time.Now().In(loc)
 	c.JSON(http.StatusOK, gin.H{"data": now})
 }
 
@@ -21,13 +22,7 @@ func main() {
 	gin.DisableConsoleColor()
 
 	logFilePath := "gin.log"
-	var f *os.File
-	var fileError error
-	if _, err := os.Stat(logFilePath); os.IsNotExist(err) {
-		f, fileError = os.Create(logFilePath)
-	} else {
-		f, fileError = os.OpenFile(logFilePath, os.O_APPEND, os.FileMode(0644))
-	}
+	f, fileError := os.OpenFile(logFilePath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, os.FileMode(0644))
 	if fileError != nil {
 		log.Fatal(fileError)
 	}
